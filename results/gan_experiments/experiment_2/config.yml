@@ -1,0 +1,65 @@
+gan:
+  beta_1: 0.606
+  beta_2: 0.986
+  discriminator_layers:
+  - activation: relu
+    batch_normalization: false
+    dropout: 0.14
+    kernel_initializer: glorot_uniform
+    units: 604
+  - activation: relu
+    batch_normalization: true
+    dropout: 0.09
+    kernel_initializer: he_normal
+    units: 768
+  - activation: leaky_relu
+    batch_normalization: true
+    dropout: 0.23
+    kernel_initializer: he_normal
+    units: 412
+  - activation: leaky_relu
+    batch_normalization: false
+    dropout: null
+    kernel_initializer: glorot_uniform
+    units: 869
+  - activation: relu
+    batch_normalization: true
+    dropout: null
+    kernel_initializer: he_normal
+    units: 570
+  - activation: leaky_relu
+    batch_normalization: true
+    dropout: 0.16
+    kernel_initializer: he_normal
+    units: 343
+  epochs: 12
+  generator_layers:
+  - activation: leaky_relu
+    batch_normalization: true
+    dropout: 0.12
+    kernel_initializer: lecun_normal
+    units: 508
+  - activation: leaky_relu
+    batch_normalization: true
+    dropout: 0.26
+    kernel_initializer: he_normal
+    units: 397
+  - activation: relu
+    batch_normalization: false
+    dropout: 0.12
+    kernel_initializer: lecun_normal
+    units: 898
+  - activation: leaky_relu
+    batch_normalization: false
+    dropout: 0.03
+    kernel_initializer: he_normal
+    units: 797
+  learning_rate: 0.000126
+  loss_function: binary_crossentropy
+  optimizer: adam
+  rho: 0.93
+settings:
+  batch_size: 128
+  codings_size: 457
+  learning_rate: 6.0e-05
+  seed: 406

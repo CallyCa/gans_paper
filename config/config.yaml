@@ -1,0 +1,162 @@
+# config.yaml
+settings:
+  seed: 42
+  epochs: 50
+  batch_size: 64
+  codings_size: 30
+  learning_rate: 0.0005 # Reduzir o learning rate para um treinamento mais estável
+  inter_op_parallelism_threads: 16 # Utilizar todos os núcleos da CPU para operações inter
+  intra_op_parallelism_threads: 16 # Utilizar todos os núcleos da CPU para operações intra
+
+autoencoder:
+  input_shape: [28, 28]
+  encoder_layers:
+    - units: 256
+      activation: "relu"
+    - units: 128
+      activation: "relu"
+    - units: 64
+      activation: "relu"
+  decoder_layers:
+    - units: 128
+      activation: "relu"
+    - units: 256
+      activation: "relu"
+    - units: 784
+      activation: "sigmoid"
+  learning_rate: 0.0005
+  epochs: 50
+  loss: "mse"
+
+linear_autoencoder:
+  input_shape: [3]
+  encoder_layers:
+    - units: 2
+      activation: "linear" # sem ativação para um autoencoder linear
+  decoder_layers:
+    - units: 3
+      activation: "linear" # sem ativação para um autoencoder linear
+  learning_rate: 0.5 # Manter taxa de aprendizado alta devido à simplicidade do modelo
+  epochs: 500
+  loss: "mse"
+
+stacked_autoencoder:
+  input_shape: [28, 28]
+  encoder_layers:
+    - units: 256
+      activation: "relu"
+    - units: 128
+      activation: "relu"
+    - units: 64
+      activation: "relu"
+  decoder_layers:
+    - units: 128
+      activation: "relu"
+    - units: 256
+      activation: "relu"
+    - units: 784
+      activation: "sigmoid"
+  learning_rate: 0.0005
+  epochs: 50
+  loss: "mse"
+
+variational_autoencoder:
+  input_shape: [28, 28]
+  codings_size: 10
+  encoder_layers:
+    - units: 256
+      activation: "relu"
+    - units: 128
+      activation: "relu"
+    - units: 64
+      activation: "relu"
+  decoder_layers:
+    - units: 64
+      activation: "relu"
+    - units: 128
+      activation: "relu"
+    - units: 256
+      activation: "relu"
+  learning_rate: 0.0005
+  epochs: 50
+  loss: "mse"
+
+gan:
+  codings_size: 30
+  generator_layers:
+    - units: 256
+      activation: "relu"
+      kernel_initializer: "he_normal"
+    - units: 512
+      activation: "relu"
+      kernel_initializer: "he_normal"
+    - units: 1024
+      activation: "relu"
+      kernel_initializer: "he_normal"
+    - units: 784
+      activation: "sigmoid"
+      kernel_initializer: "he_normal"
+  discriminator_layers:
+    - units: 1024
+      activation: "relu"
+      kernel_initializer: "he_normal"
+    - units: 512
+      activation: "relu"
+      kernel_initializer: "he_normal"
+    - units: 256
+      activation: "relu"
+      kernel_initializer: "he_normal"
+    - units: 1
+      activation: "sigmoid"
+      kernel_initializer: "he_normal"
+  learning_rate: 0.0005
+  epochs: 10
+  loss_function: "binary_crossentropy"
+  optimizer: "rmsprop"
+
+dcgan:
+  codings_size: 100
+  generator_layers:
+    - units: 6272
+      activation: "none"
+    - units: [7, 7, 128]
+      activation: "none"
+    - batch_normalization: true
+    - conv2d_transpose:
+        filters: 64
+        kernel_size: 5
+        strides: 2
+        padding: "same"
+        activation: "relu"
+    - batch_normalization: true
+    - conv2d_transpose:
+        filters: 1
+        kernel_size: 5
+        strides: 2
+        padding: "same"
+        activation: "tanh"
+  discriminator_layers:
+    - conv2d:
+        filters: 64
+        kernel_size: 5
+        strides: 2
+        padding: "same"
+    - leaky_relu:
+        alpha: 0.2
+    - dropout:
+        rate: 0.4
+    - conv2d:
+        filters: 128
+        kernel_size: 5
+        strides: 2
+        padding: "same"
+    - leaky_relu:
+        alpha: 0.2
+    - dropout:
+        rate: 0.4
+    - flatten: true
+    - dense:
+        units: 1
+        activation: "sigmoid"
+  learning_rate: 0.0005
+  epochs: 50

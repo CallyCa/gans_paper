@@ -1,0 +1,40 @@
+name: homl3
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  ##### Core scientific packages
+  - jupyterlab=3.4.6
+  - matplotlib=3.5.3
+  - numpy=1.23.3
+  - pandas=1.4.4
+  - scipy=1.9.1
+
+  ##### Machine Learning packages
+  - scikit-learn=1.1.2
+
+  ##### TensorFlow-related packages
+  - tensorflow=2.10.0
+
+  ##### Image manipulation
+  - pillow=9.2.0
+
+  ##### Additional utilities
+  - joblib=1.1.0
+  - requests=2.28.1
+  - nbdime=3.1.1
+  - numexpr=2.8.3
+  - tqdm=4.64.1
+  - ipywidgets=8.0.2
+
+  ##### PyTorch packages
+  - pip
+  - pip:
+      - torch==2.2.0
+      - torchvision==0.17.0
+      - tensorflow-serving-api~=2.10.0
+      - tensorboard-plugin-profile~=2.8.0
+      - graphviz~=0.20.1
+      - transformers~=4.21.3
+      - tensorflow-datasets~=4.6.0
+      - tensorflow-hub~=0.12.0

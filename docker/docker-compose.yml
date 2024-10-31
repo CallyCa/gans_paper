@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  handson-ml3:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+      # dockerfile: ./docker/Dockerfile.gpu
+      args:
+        - username=devel
+        - userid=1000
+    container_name: handson-ml3
+    image: ageron/handson-ml3:latest
+    # image: ageron/handson-ml3:latest-gpu
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+    volumes:
+      - ../:/home/devel/handson-ml3
+      - ../projeto-gan-autoencoder-ahp-gaussiano/src:/home/devel/handson-ml3/src
+      - ../projeto-gan-autoencoder-ahp-gaussiano/config:/home/devel/handson-ml3/config
+      - ../projeto-gan-autoencoder-ahp-gaussiano/config/updated-configs:/home/devel/handson-ml3/config/updated-configs
+      - ../projeto-gan-autoencoder-ahp-gaussiano/config/csv:/home/devel/handson-ml3/config/csv
+      - ../projeto-gan-autoencoder-ahp-gaussiano/config/json:/home/devel/handson-ml3/config/json
+      - ../projeto-gan-autoencoder-ahp-gaussiano/notebooks/images/generative:/home/devel/handson-ml3/images/generative
+      - ../projeto-gan-autoencoder-ahp-gaussiano/notebooks/save-models:/home/devel/handson-ml3/save-models
+    command: /opt/conda/envs/homl3/bin/jupyter lab --ip='0.0.0.0' --port=8888 --no-browser
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - capabilities: [gpu]

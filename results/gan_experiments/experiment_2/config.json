@@ -1,0 +1,91 @@
+{
+    "settings": {
+        "seed": 406,
+        "codings_size": 457,
+        "batch_size": 128,
+        "learning_rate": 6e-05
+    },
+    "gan": {
+        "generator_layers": [
+            {
+                "units": 508,
+                "activation": "leaky_relu",
+                "kernel_initializer": "lecun_normal",
+                "dropout": 0.12,
+                "batch_normalization": true
+            },
+            {
+                "units": 397,
+                "activation": "leaky_relu",
+                "kernel_initializer": "he_normal",
+                "dropout": 0.26,
+                "batch_normalization": true
+            },
+            {
+                "units": 898,
+                "activation": "relu",
+                "kernel_initializer": "lecun_normal",
+                "dropout": 0.12,
+                "batch_normalization": false
+            },
+            {
+                "units": 797,
+                "activation": "leaky_relu",
+                "kernel_initializer": "he_normal",
+                "dropout": 0.03,
+                "batch_normalization": false
+            }
+        ],
+        "discriminator_layers": [
+            {
+                "units": 604,
+                "activation": "relu",
+                "kernel_initializer": "glorot_uniform",
+                "dropout": 0.14,
+                "batch_normalization": false
+            },
+            {
+                "units": 768,
+                "activation": "relu",
+                "kernel_initializer": "he_normal",
+                "dropout": 0.09,
+                "batch_normalization": true
+            },
+            {
+                "units": 412,
+                "activation": "leaky_relu",
+                "kernel_initializer": "he_normal",
+                "dropout": 0.23,
+                "batch_normalization": true
+            },
+            {
+                "units": 869,
+                "activation": "leaky_relu",
+                "kernel_initializer": "glorot_uniform",
+                "dropout": null,
+                "batch_normalization": false
+            },
+            {
+                "units": 570,
+                "activation": "relu",
+                "kernel_initializer": "he_normal",
+                "dropout": null,
+                "batch_normalization": true
+            },
+            {
+                "units": 343,
+                "activation": "leaky_relu",
+                "kernel_initializer": "he_normal",
+                "dropout": 0.16,
+                "batch_normalization": true
+            }
+        ],
+        "learning_rate": 0.000126,
+        "epochs": 12,
+        "loss_function": "binary_crossentropy",
+        "optimizer": "adam",
+        "beta_1": 0.606,
+        "beta_2": 0.986,
+        "rho": 0.93
+    }
+}
